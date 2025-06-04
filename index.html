@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kak Acha beli PC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      color: #333;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 4px #fff8;
+    }
+    .countdown {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 #29292919;
+    }
+    .time-segment {
+      text-align: center;
+      min-width: 70px;
+    }
+    .time-segment .number {
+      font-size: 2.5rem;
+      color: #ff61a6;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .time-segment .label {
+      font-size: 1rem;
+      color: #333;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+    .game-list-container {
+      background: #fff;
+      margin-top: 2rem;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px 0 #29292910;
+      width: 100%;
+      max-width: 350px;
+    }
+    .game-list-title {
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .game-list {
+      list-style: decimal inside;
+      padding: 0;
+      margin: 0;
+      color: #444;
+      font-size: 1.1rem;
+    }
+    .game-list li {
+      margin-bottom: 0.7em;
+    }
+    @media (max-width: 600px) {
+      .countdown {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.2rem 1rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .game-list-container {
+        padding: 1rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Kak Acha beli PC</h1>
+  <div class="countdown" id="countdown">
+    <div class="time-segment">
+      <div class="number" id="days">00</div>
+      <div class="label">Hari</div>
+    </div>
+    <div class="time-segment">
+      <div class="number" id="hours">00</div>
+      <div class="label">Jam</div>
+    </div>
+    <div class="time-segment">
+      <div class="number" id="minutes">00</div>
+      <div class="label">Menit</div>
+    </div>
+    <div class="time-segment">
+      <div class="number" id="seconds">00</div>
+      <div class="label">Detik</div>
+    </div>
+  </div>
+  <div class="game-list-container">
+    <div class="game-list-title">Game Horror PC yang akan dimainkan:</div>
+    <ol class="game-list">
+      <li>Resident Evil 7</li>
+      <li>Home Sweet Home</li>
+      <li>Outlast 1</li>
+    </ol>
+  </div>
+  <script>
+    // Set target date
+    const targetDate = new Date("2025-06-06T00:00:00+07:00"); // Waktu Indonesia Barat (WIB, GMT+7)
+
+    function pad(num) {
+      return num.toString().padStart(2, '0');
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML =
+          '<div style="font-size:1.5rem;color:#ff61a6;font-weight:bold;">Saatnya Kak Acha beli PC! 🎉</div>';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').textContent = pad(days);
+      document.getElementById('hours').textContent = pad(hours);
+      document.getElementById('minutes').textContent = pad(minutes);
+      document.getElementById('seconds').textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
